@@ -1,0 +1,42 @@
+\section{Results}
+\par
+Before we present the results, it is important to state that one of the main focuses of the training and testing phases is to achieve a very low false positives rate. This is especially important in the context of an AV solution because the detection of a benign sample can have serious consequences on a user's working environment. Consequently, we chose to use a modified version of the Perceptron algorithm named OSC, which incorporates an extra stage in the training algorithm to ensure that all the samples marked as benign are correctly classified. At each iteration, the OSC version of the Perceptron algorithm performs an extra training procedure for the records of a certain class, which is finished when the number of falsely classified entries from that class drops to a certain quota. In our training, this minimization process is applied over the class of benign samples and the quota is set to zero. Furthermore, the evaluation of a sample in the OSC algorithm is identical to the one used in the Perceptron algorithm, which is an advantage from the standpoint of performance.
+\par
+In order to train our model we used two approaches, $OSC$ and $OSC_{U}$, with two discretization versions. The first dicretization method is the one mentioned in section IV and the second method is a modified version of the first method, which produces larger intervals for a certain feature. The first approach involves using almost all our records. It is important to express the fact that our training data does not involve any inconsistencies. Using the first discretization method, we trained our model ({$OSC_{D1}$}) for 500 iterations and we developed an accuracy of 99.68\% and sensitivity of 98.73\%. 
+\par
+The second approach, named $OSC_{U}$,  involved removing duplicate records from the entries used as inputs for the training algorithm. In this regard, if we encountered multiple records with the same feature vector (and labeled the same) we only kept one record.
+\par
+As a result of this filtering, the number of training samples was reduced to 14,495 (11,636 benign, 2859 malicious). This new model ({$OSC_{UD1}$}) yielded an accuracy of 99.65\% and sensitivity of 98.25\%.
+\par
+We have also experimented with a slightly different discretization method which has the effect of increasing the length of the intervals associated with the features. Using this new method, we trained another two models ({$OSC_{D2}$} and {$OSC_{UD2}$}) for 500 iterations. The ({$OSC_{D2}$} model has developed an accuracy of 97.72\% and sensitivity of 98.91\% and
+the {$OSC_{UD2}$} had an accuracy of 99.69\% and sensitivity of 98.44\%. We specify that the filtering process used for {$OSC_{UD2}$} reduced the training dataset to 14255 samples, 11,493 benign and 2762 malicious.
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | }
+    \hline
+    Name & Sensitivity & Accuracy\\ \hline
+    \textit{$OSC_{D1}$} --- 500 & $98.73\%$ &  99.68\% \\ \hline
+    \textit{$OSC_{UD1}$} --- 500 & $98.25\%$ &  99.65\% \\ \hline
+    \textit{$OSC_{D2}$} --- 500  & $98.91\%$ &  99.72\% \\ \hline
+    \textit{$OSC_{UD2}$} --- 500 & $98.44\%$ &  99.69\% \\ \hline
+    \end{tabular}
+    \caption{Comparative training results} 
+    \label{tab:trainingresults}
+\end{table}
+\par
+We constructed a test set of samples in order to compare our two proposed models. We selected 8668 benign samples and 10,000 malicious samples. The results of these tests can be observed in the following table:
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | }
+    \hline
+    Name & FP & FP Rate & TP & Sensitivity\\ \hline
+    \textit{$OSC_{D1}$} --- 500 & $23$ & 0.26\% & 9231 & 92.31\% \\ \hline
+    \textit{$OSC_{UD1}$} --- 500 & $16$ &  0.18\% & 9194 & 91.94\% \\ \hline
+    \textit{$OSC_{D2}$} --- 500 & $28$ & 0.32\% & 9299 & 92.99\% \\ \hline
+    \textit{$OSC_{UD2}$} --- 500 & $9$ &  0.10\% & 9037 & 90.37\% \\ \hline
+    \end{tabular}
+    \caption{Results on test dataset} 
+    \label{tab:testresults}
+\end{table}
+\par
+Considering these results, we can state that there is no model that can be considered the best.  Although the models built using the second discretization method have a higher accuracy and sensitivity in the testing phase, they perform worse in terms of FP rate ({$OSC_{D2}$} has a higher FP rate than {$OSC_{D1}$}) or sensitivity ({$OSC_{UD2}$} has a lower sensitivity than {$OSC_{UD1}$}) on the test dataset. Taking into account these results, we can state that the choice of "the best model" means making a trade-off between the FP rate and the sensitivity and one must choose a model to best fit his needs. Due to the fact that one of our goals is to construct a model that has a low FP rate, the best model in our case is {$OSC_{UD2}$}.

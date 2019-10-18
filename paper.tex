@@ -1,0 +1,136 @@
+%\documentclass[twoside]{article}
+\documentclass[10pt, conference, compsocconf]{IEEEtran}
+%
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{algorithm}
+%\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{listings}
+
+\usepackage{mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true,linktoc=all,allcolors=blue}
+
+\usepackage{array}
+\usepackage{longtable}
+
+% Metadata Information
+
+
+% Package to generate and customize Algorithm as per ACM style
+%\usepackage[ruled]{algorithm2e}
+%\SetAlFnt{\algofont}
+%\SetAlCapFnt{\algofont}
+%\SetAlCapNameFnt{\algofont}
+%\SetAlCapHSkip{0pt}
+%\IncMargin{-\parindent}
+%\renewcommand{\algorithmcfname}{ALGORITHM}
+
+\definecolor{myRed}{rgb}{1,0,0}
+
+\lstdefinestyle{Common}
+{
+    extendedchars=\true,
+    language={[Visual]Basic},
+    frame=single,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    %===========================================================
+    framesep=3pt,%expand outward.
+    framerule=0.4pt,%expand outward.
+    xleftmargin=3.4pt,%make the frame fits in the text area. 
+    xrightmargin=3.4pt,%make the frame fits in the text area.
+    %=========================================================== 
+    rulecolor=\color{myRed}
+}
+
+\lstset
+{
+    breaklines=true,
+    tabsize=3,
+    showstringspaces=false
+}
+
+\lstdefinestyle{A}
+{
+    style=Common,
+    backgroundcolor=\color{yellow!10},
+    basicstyle=\scriptsize\color{black}\ttfamily,
+    keywordstyle=\color{orange},
+    identifierstyle=\color{cyan},
+    stringstyle=\color{myRed},
+    commentstyle=\color{mGreen}
+}
+
+\begin{document}
+	
+\title{Improving Detection of Malicious Office Documents \\ using One-Side Classifiers}
+\author{
+
+	\IEEEauthorblockN{Silviu - Constantin Vi\c tel\\}
+	\IEEEauthorblockA{"Al.I. Cuza" University - Faculty of Computer Science\\
+	Bitdefender Cyber Threat Intelligence Lab\\
+	Ia\c si, Rom\^ ania\\
+	Email: svitel@bitdefender.com\\} 
+
+	\and 
+	\IEEEauthorblockN{Gheorghe Balan\\}
+	\IEEEauthorblockA{"Al.I. Cuza" University - Faculty of Computer Science\\
+	Bitdefender Cyber Threat Intelligence Lab\\
+	Ia\c si, Rom\^ ania\\
+	Email: gbalan@bitdefender.com\\} 
+
+	\and
+
+	\IEEEauthorblockN{Dumitru Bogdan Prelipcean\\}
+	\IEEEauthorblockA{"Al.I. Cuza" University - Faculty of Computer Science\\
+	Bitdefender Cyber Threat Intelligence Lab\\
+	Ia\c si, Rom\^ ania\\
+	Email: bprelipcean@bitdefender.com\\} 
+}
+
+\maketitle
+\input{abstract}
+\input{introduction}
+\input{related_work}
+\input{problem}
+\input{database}
+\input{results}
+\input{conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{paper}
+
+
+\end{document}

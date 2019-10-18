@@ -1,0 +1,34 @@
+\section{Database and features}
+\par
+The classifier described in this paper was tested on a set of samples provided by the Bitdefender Cyber Threat Intelligence Laboratory. The initial dataset consisted of 217,557 Office files and VBA projects (.doc, .docx, .xls, .xlsx) collected from June 2017 to May 2019, 176,314 malicious and 41,243 benign. In the further presentation of the features and samples selection we will use the word “token” to describe an atomic element of the VBA language, such as a keyword, a variable name, a constant value or an operator. The samples were passed through a filter which removed documents whose macros had 32 tokens or less,  because we considered that those files do not provide relevant information for our training process. Based on our analysis, these type of samples produces a very small numer of features which is not sufficient for evaluating their nature.  
+\par
+As a result of the filtering process, the number of malicious samples was unchanged and the number of benign samples was reduced to 38,668. For the training process, we selected 30,000 of the 38,668 benign samples and 10,000 malicious samples in a random fashion.
+\par
+The features used in the training process have been extracted by various processing methods applied to the tokens found in the macro code of the Office files. This static approach of the features extraction is motivated by the need of building a fast evaluation method. A dynamic feature extraction procedure would imply the execution of a sample in a controlled environment in order to observe its behaviour, which is very time consuming.  By processing the strings found in the code illustrated in Listing \ref{code:featureextraction}, we can observe the presence of the "mshta" utility\footnote{The Mshta.exe utility allows the execution of Microsoft HTML Applications. These are standalone applications which execute using the same models as Internet Explorer, but outside the browser. They can include malicious VBScript or JScript code.}   and the existence of an URL.
+
+\begin{lstlisting}[style=A, caption={Example of malicious code inside a macro}, label={code:featureextraction}]
+Sub Document_Open()
+
+Shell "mshta javascript:""\textbackslash..\textbackslash,RunHTMLApplication "";GetObject(""script:http:/" + Replace(abadondend, "\textbackslash", "/") + """);close();"
+
+End Sub
+\end{lstlisting}
+
+ If we correlate these observations with the presence of  the "Shell" command, we can extract the feature "MSHTA\_REMOTE\_EXECUTION". In this example, we can also extract a feature which counts the number of strings in a concatenation operation. In order to create a model that is as generic as possible, we extracted properties that are specific to clean samples, to malicious ones and properties which can describe both classes of samples. By analyzing samples from both categories and developping processing methods we extracted a set of 536 features which describe general characteristics of the macro code (for example, the number of variables containing digits in their name), obfuscation features (for example, the number of statements in an assignment) and also behavioral characteristics, such as a function call with suspicious parameters.
+\par
+Due to the aforementioned performance restrictions, we will use only boolean features. This method also reduces the space needed to store the values of the features. Because some these values are not inherently boolean, the features need to be discretized. The discretization process of a feature involves creating a set of intervals which enclose its values. The inclusion of a value within one of these intervals will constitute a new feature. The process used for discretizing the values of a feature aimed to create intervals which include elements whose frequency and value are very close.  For example, we observed that some malicious samples have a higher number of small functions than benign ones. This information led us to the selection of 12 intervals which represent the values of the feature in a way that provides more relevant data. (Table I)
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | }
+    \hline
+    Name & Interval & Feature Name\\ \hline
+    NR SMALL FUNCTIONS & $[1, 3)$ & \textit{"under-3-functions"}  \\ \hline
+    NR SMALL FUNCTIONS & $[3, 4)$ & \textit{"under-4-functions"}  \\ \hline
+    ... & ... & ... \\ \hline   
+    NR SMALL FUNCTIONS & $[953, 954) $ & \textit{"under-954-functions"}  \\ \hline
+    \end{tabular}
+    \caption{Example of discretization} 
+    \label{tab:discretizationeg}
+\end{table}
+\par
+By discretizing the values, from an initial set of 536 features, we arrived at a feature vector of 2977 properties. By design, our approach will use only 256 features. These features are chosen using a process named Conditional Mutual Information Maximization\cite{fleuret}. The goal of this process is to select a subset of features which carries as much information as possible while minimizing the information shared between these features in order to eliminate redundant information.

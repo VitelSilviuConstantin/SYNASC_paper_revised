@@ -1,0 +1,95 @@
+@inproceedings{Jarhead,
+ author = {Schlumberger, Johannes and Kruegel, Christopher and Vigna, Giovanni},
+ title = {Jarhead Analysis and Detection of Malicious Java Applets},
+ booktitle = {Proceedings of the 28th Annual Computer Security Applications Conference},
+ series = {ACSAC '12},
+ year = {2012},
+ isbn = {978-1-4503-1312-4},
+ location = {Orlando, Florida, USA},
+ pages = {249--257},
+ numpages = {9},
+ url = {http://doi.acm.org/10.1145/2420950.2420988},
+ doi = {10.1145/2420950.2420988},
+ acmid = {2420988},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+
+@article{JMD,
+author = {Herrera, A and Cheney, B},
+year = {2015},
+month = {01},
+pages = {3-13},
+title = {JMD: A hybrid approach for detecting Java malware},
+volume = {161},
+booktitle = {Conferences in Research and Practice in Information Technology Series}
+}
+
+@article{Obfuscation,
+title = "Detection of Obfuscation in Java Malware",
+journal = "Procedia Computer Science",
+volume = "78",
+pages = "521 - 529",
+year = "2016",
+note = "1st International Conference on Information Security \& Privacy 2015",
+issn = "1877-0509",
+doi = "https://doi.org/10.1016/j.procs.2016.02.097",
+url = "http://www.sciencedirect.com/science/article/pii/S1877050916000995",
+author = "Renuka Kumar and Anand Raj Essar Vaishakh",
+keywords = "Obfuscation, Machine learning, Java, Malware, Bytecode, Static analysis, Supervised learning, Cryptanalysis"
+}
+
+@Article{parteval,
+author="Chawdhary, Aziem
+and Singh, Ranjeet
+and King, Andy",
+title="Partial evaluation of string obfuscations for Java malware detection",
+journal="Formal Aspects of Computing",
+year="2017",
+month="Jan",
+day="01",
+volume="29",
+number="1",
+pages="33--55",
+issn="1433-299X",
+doi="10.1007/s00165-016-0357-3",
+url="https://doi.org/10.1007/s00165-016-0357-3"
+}
+
+@misc{MicrosoftURL,
+title={Combating a spate of Java malware with machine learning in real-time}, 
+url={https://cloudblogs.microsoft.com/microsoftsecure/2017/04/20/combating-a-wave-of-java-malware-with-machine-learning-in-real-time/},
+journal={How Microsoft Advanced Threat Analytics detects golden ticket attacks},
+}
+
+@inproceedings{OSC,
+        author    = {Dragos Gavrilut and
+        Razvan Benchea and
+        Cristina Vatamanu},
+        title     = {Optimized Zero False Positives Perceptron Training for Malware Detection},
+        booktitle = {14th International Symposium on Symbolic and Numeric Algorithms for
+        Scientific Computing, {SYNASC} 2012, Timisoara, Romania, September
+        26-29, 2012},
+        pages     = {247--253},
+        year      = {2012},
+        url       = {http://dx.doi.org/10.1109/SYNASC.2012.34},
+        doi       = {10.1109/SYNASC.2012.34},
+        timestamp = {Tue, 13 Jan 2015 18:19:55 +0100},
+        biburl    = {http://dblp.uni-trier.de/rec/bib/conf/synasc/GavrilutBV12a},
+        bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+
+@InProceedings{map_gdt, 
+	author={Drago\c{s} Gavrilu\c{t}, Mihai Cimpoe\c{s}u, Dan Anton and Liviu Ciortuz}, 
+	booktitle={Computation World: Future Computing, Service Computation, Cognitive, Adaptive, Content, Patterns}, 
+	title={Malware Detection Using Perceptrons and Support Vector Machines}, 
+	year={2009},
+        url={https://ieeexplore.ieee.org/document/5359599/}
+}
+
+@article{kimhongohlee2018, 
+         title={Obfuscated VBA Macro Detection Using Machine Learning}, 
+	 DOI={10.1109/dsn.2018.00057}, 
+	 journal={2018 48th Annual IEEE/IFIP International Conference on Dependable Systems and Networks (DSN)}, 
+	 author={Kim, Sangwoo and Hong, Seokmyung and Oh, Jaesang and Lee, Heejo}, 
+	 year={2018}}
